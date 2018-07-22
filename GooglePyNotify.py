@@ -6,8 +6,8 @@ import pychromecast
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from gtts import gTTS
 
-HOST_NAME = "192.168.1.100"
-HOST_PORT = 8080
+HOST_NAME = "192.168.1.141"
+HOST_PORT = 9090
 
 MP3_CACHE_DIR = "mp3_cache"
 CHROMECASTS = 0
@@ -68,7 +68,7 @@ class HttpServer(SimpleHTTPRequestHandler):
 
         print("Sending notification...")
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # Pull IP Address for Local HTTP File Serving (Note: This requires an internet connection)
-        s.connect(("8.8.8.8", 8080))
+        s.connect(("8.8.8.8", 9090))
         ip_add = s.getsockname()[0]
         print (ip_add)
         s.close()
@@ -82,7 +82,7 @@ class HttpServer(SimpleHTTPRequestHandler):
         castdevice = next(cc for cc in CHROMECASTS if cc.device.model_name == "Google Home")
         castdevice.wait()
         mediacontroller = castdevice.media_controller # ChromeCast Specific
-        url = "http://" + ip_add + ":8080/" + mp3
+        url = "http://" + ip_add + ":9090/" + mp3
         print ("Anil: "+url)
         mediacontroller.play_media(url, 'audio/mp3')
         return
