@@ -80,6 +80,9 @@ class HttpServer(SimpleHTTPRequestHandler):
     
     def Cast(self, ip_add, mp3):
         castdevice = next(cc for cc in CHROMECASTS if cc.device.model_name == "Google Home")
+        print("**********************")
+        print(castdevice)
+        print("**********************")
         castdevice.wait()
         mediacontroller = castdevice.media_controller # ChromeCast Specific
         url = "http://" + ip_add + ":9090/" + mp3
@@ -92,7 +95,7 @@ if not os.path.exists(MP3_CACHE_DIR):
 
 print("Getting chromecasts...")
 CHROMECASTS = pychromecast.get_chromecasts()
-print("chromecasts found: " + '\n'.join([cc.device.model_name for cc in CHROMECASTS if cc.device.model_name == "Google Home" or cc.device.model_name == "Google Home Mini"]))
+print("Google home list: " + '\n'.join([cc.device.model_name for cc in CHROMECASTS if cc.device.model_name == "Google Home" or cc.device.model_name == "Google Home Mini"]))
 
 print(time.asctime(), "Server Starts - %s:%s" % (HOST_NAME, HOST_PORT))
 httpServer = HTTPServer((HOST_NAME, HOST_PORT), HttpServer) #HTTP Server Stuff (Python Librarys)
