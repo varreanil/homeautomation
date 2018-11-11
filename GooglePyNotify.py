@@ -92,7 +92,7 @@ if not os.path.exists(MP3_CACHE_DIR):
 
 print("Getting chromecasts...")
 CHROMECASTS = pychromecast.get_chromecasts()
-print("Getting chromecasts..." + ''.join([cc.device.friendly_name for cc in CHROMECASTS])
+print("chromecasts found: " + ''.join([cc.device.friendly_name for cc in CHROMECASTS])
 
 print(time.asctime(), "Server Starts - %s:%s" % (HOST_NAME, HOST_PORT))
 httpServer = HTTPServer((HOST_NAME, HOST_PORT), HttpServer) #HTTP Server Stuff (Python Librarys)
