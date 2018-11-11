@@ -79,7 +79,7 @@ class HttpServer(SimpleHTTPRequestHandler):
         return
     
     def Cast(self, ip_add, mp3):
-        castdevice = next(cc for cc in CHROMECASTS if cc.device.model_name == "Google Home")
+        castdevice = next(cc for cc in CHROMECASTS if cc.device.friendly_name == "Basement Home")
         print("**********************")
         print(castdevice)
         print("**********************")
