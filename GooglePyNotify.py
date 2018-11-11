@@ -79,15 +79,25 @@ class HttpServer(SimpleHTTPRequestHandler):
         return
     
     def Cast(self, ip_add, mp3):
-        castdevice = next(cc for cc in CHROMECASTS if cc.device.friendly_name == "Basement Home")
+        basementhome = next(cc for cc in CHROMECASTS if cc.device.friendly_name == "Basement Home")
+        bedroomhome = next(cc for cc in CHROMECASTS if cc.device.friendly_name == "Bedroom Home")
+        familyroomhome = next(cc for cc in CHROMECASTS if cc.device.friendly_name == "Family Room Home")
         print("**********************")
-        print(castdevice)
+        print(basementhome.device)
+        print(bedroomhome.device)
+        print(familyroomhome.device)
         print("**********************")
-        castdevice.wait()
-        mediacontroller = castdevice.media_controller # ChromeCast Specific
+        basementhome.wait()
+        bedroomhome.wait()
+        familyroomhome.wait()
+        basementcontroller = basementhome.media_controller # ChromeCast Specific
+        bedroomcontroller = bedroomhome.media_controller # ChromeCast Specific
+        familyroomcontroller = familyroomhome.media_controller # ChromeCast Specific
         url = "http://" + ip_add + ":9090/" + mp3
         print ("Anil: "+url)
-        mediacontroller.play_media(url, 'audio/mp3')
+        basementcontroller.play_media(url, 'audio/mp3')
+        bedroomcontroller.play_media(url, 'audio/mp3')
+        familyroomcontroller.play_media(url, 'audio/mp3')
         return
 
 if not os.path.exists(MP3_CACHE_DIR):
